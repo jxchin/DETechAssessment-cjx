@@ -5,3 +5,5 @@
 /.vs/DETechAssessment-cjx/FileContentIndex
 *.wsuo
 /.vs
+/logs/*
+/Section1/logs
