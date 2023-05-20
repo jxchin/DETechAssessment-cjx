@@ -7,7 +7,12 @@ services:
     image: postgres
     restart: always
     environment:
+      POSTGRES_USER: section2
       POSTGRES_PASSWORD: example
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
 
   adminer:
     image: adminer
