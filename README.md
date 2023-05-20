@@ -23,7 +23,7 @@ Approximately 11 hours.
 
 ### What to improve on
 1. Separate my functions into various files and import them in my main script.
-
+2. Add more try blocks and logging in my functions
 
 ### How to setup on your local machine
 
