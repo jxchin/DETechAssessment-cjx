@@ -3,28 +3,11 @@ from os.path import isfile, join
 from datetime import datetime
 from dateutil.parser import parse
 from nameparser import HumanName
+from hashlib import sha256
 
 import re
-#import sys
 import pandas as pd
-import numpy as np
 import logging
-
-# Initialize data paths
-dataPath = '/opt/airflow/data/submissions/'
-successPath = '/opt/airflow/data/successful/'
-unsuccessPath = '/opt/airflow/data/unsuccessful/'
-archivePath = '/opt/airflow/data/archived_submissions/'
-
-# Setup daily log file for this Task
-logging.basicConfig(filename="/opt/airflow/logs/application_submission_dag/process_submission_"+datetime.today().strftime('%Y%m%d')+".log",
-                        format='%(asctime)s %(levelname)s %(message)s',
-                        filemode='a')
-
-logger = logging.getLogger()
-
-logger.setLevel(logging.INFO)
-
 
 def list_dir():
     # Save file-only names into a list
@@ -58,31 +41,41 @@ def process_application(file):
     df[['age','above_18']] = df['date_of_birth'].apply(lambda x: pd.Series(check_age(x)))
 
     # derive valid_email col
-    #df['valid_email'] = check_email(df.iloc[0]['email'])
     df['valid_email'] = df['email'].apply(lambda x: check_email(x))
 
-    # derive app_status col
-    #df['application_status'] = application_status(df)
-    df['application_status'] = df.apply(application_status(df))
-
+    # derive application_status col
+    df = application_status(df)
 
     # Split rows using application status
     # Todo: Log the count of each results
-    df_successful = df[df['application_status'] == 1]
-    df_unsuccessful = df[df['application_status'] == 0]
+    df_successful = df[df['application_status'] == '1']
+    df_unsuccessful = df[df['application_status'] == '0']
+    
+    # Convert birthday format
+    df_successful['date_of_birth'] = df_successful['date_of_birth'].apply(lambda x: convert_birthday(x))
 
+    # derive hash col
+    df_successful['bday_hash'] = df_successful['date_of_birth'].apply(lambda x: hash_value(x))
+
+    # Generate Membership ID
+    df_successful = generate_membership_id(df_successful)
+
+    # Drop temp cols created
+    df_successful.drop(['has_name','mobile_num_count','valid_email','application_status','bday_hash'], inplace=True ,axis=1)
+    df_unsuccessful.drop(['has_name','mobile_num_count','valid_email','application_status'], inplace=True, axis=1)
+    
     # Save both output datasets into respective folders
     df_successful.to_csv(successPath+"successful_"+file, index=False)
     df_unsuccessful.to_csv(unsuccessPath+"unsuccessful_"+file, index=False)
 
 def application_status(df):
-    #if df['age'] > 18 & df['valid_email'] == 1 & df['mobile_num_count'] == 8:
-    if (df['has_name']) & (df['mobile_num_count'] == 8) & (df['above_18']) & (df['valid_email']) :
-        #logger.info("Successful.")
-        return 1
-    else:
-        #logger.info("Unsuccessful.")
-        return 0
+    # Create a new col with '0' as default value
+    df['application_status'] = '0'
+
+    # Using the 4 criterias above to determine whether application is successful or not.
+    df.loc[(df['has_name']==True) & (df['above_18']==True) & (df['valid_email']==True) & (df['mobile_num_count']==8),'application_status'] = '1'
+
+    return df
 
 def check_name(name):
     # 1. Check Name is empty.
@@ -113,8 +106,9 @@ def check_age(birthday):
     try:
         birthday = parse(birthday)
     except:
-        birthday = datetime.strptime('20220101', '%Y%m%d').date()
+        # Apparently there is a wrong date included. '1996/02/31'
         logger.error("This date causes error: "+str(birthday))
+        birthday = datetime.strptime('20220101', '%Y%m%d').date()
         pass
 
     # Set the cutoff date to 01 Jan 2022 to calculate age
@@ -144,8 +138,26 @@ def check_email(email):
     else:
         return True # Valid email
 
-def main():
+def convert_birthday(birthday):
+    birthday = parse(birthday)
 
+    # Convert datetime obj to string with 'YYYYMMDD' format.
+    birthday = birthday.strftime('%Y%m%d')
+
+    return birthday
+
+def hash_value(string):
+
+    hash_string = sha256(string.encode('utf-8')).hexdigest()
+
+    return hash_string[:5]
+
+def generate_membership_id(df):
+    df['membership_id'] = df['lastname']+'_'+df['bday_hash']
+
+    return df
+
+def main():
     # Get application submission files
     files = list_dir()
     # Loop files
@@ -153,4 +165,19 @@ def main():
         process_application(file)
 
 if __name__ == '__main__':
+    # Initialize data paths
+    dataPath = '/opt/airflow/data/submissions/'
+    successPath = '/opt/airflow/data/successful/'
+    unsuccessPath = '/opt/airflow/data/unsuccessful/'
+    archivePath = '/opt/airflow/data/archived_submissions/'
+
+    # Setup daily log file for this Task
+    logging.basicConfig(filename="/opt/airflow/logs/application_submission_dag/process_submission_"+datetime.today().strftime('%Y%m%d')+".log",
+                        format='%(asctime)s %(levelname)s %(message)s',
+                        filemode='a')
+
+    logger = logging.getLogger()
+
+    logger.setLevel(logging.INFO)
+
     main()
