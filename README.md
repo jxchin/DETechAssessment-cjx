@@ -19,6 +19,7 @@ Approximately 11 hours.
 3. Moving the submission files to archive folder for reconciliation.
 4. As much as possible, write functions to encapsulate each ETL regardless how trivial, because it would be easier to maintain
 5. When possible, I opted for boolean/integer because it is faster when using them to compare/filter.
+6. Created temp columns and dropped them before saving.
 
 ### What to improve on
 1. Separate my functions into various files and import them in my main script.
