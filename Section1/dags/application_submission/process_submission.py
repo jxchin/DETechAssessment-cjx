@@ -6,6 +6,7 @@ from nameparser import HumanName
 from hashlib import sha256
 
 import re
+import shutil
 import pandas as pd
 import logging
 
@@ -21,6 +22,8 @@ def list_dir():
 def process_application(file):
     # Read csv as Pandas Dataframe
     df = pd.read_csv(dataPath+file)
+
+    logger.info("Number of applications submitted in "+file+": "+str(len(df.index)))
 
     # To determine an application is successful or not based on the following criteria:
     # 1. Name is not empty
@@ -50,6 +53,10 @@ def process_application(file):
     # Todo: Log the count of each results
     df_successful = df[df['application_status'] == '1']
     df_unsuccessful = df[df['application_status'] == '0']
+
+    # Log results
+    logger.info("Number of successful applications in "+file+": "+str(len(df_successful.index)))
+    logger.info("Number of unsuccessful applications in "+file+": "+str(len(df_unsuccessful.index)))
     
     # Convert birthday format
     df_successful['date_of_birth'] = df_successful['date_of_birth'].apply(lambda x: convert_birthday(x))
@@ -67,6 +74,13 @@ def process_application(file):
     # Save both output datasets into respective folders
     df_successful.to_csv(successPath+"successful_"+file, index=False)
     df_unsuccessful.to_csv(unsuccessPath+"unsuccessful_"+file, index=False)
+
+    logger.info("Moved files into successful/unsuccessful folders.")
+    
+    # Archive submission files
+    shutil.move(dataPath+file, archivePath+file)
+
+    logger.info("Moved file into archive folder.")
 
 def application_status(df):
     # Create a new col with '0' as default value
