@@ -29,7 +29,7 @@ Approximately 11 hours.
 
 1. Download the entire repo to your computer
 2. Install the latest version of Docker Desktop
-3. Open your terminal and navigate to ../Section1
+3. Open your terminal and navigate to ./Section1
 4. run this command, docker-compose up airflow-init
 5. run this command, docker-compose up -d
 6. Open a browser and navigate to this URL, localhost:8080
@@ -37,3 +37,26 @@ Approximately 11 hours.
 8. click on 'application_submission_dag'
 9. click the run button on the top-right of the screen
 
+## Section 2: Databases
+
+### Time spent
+Approximately 3 hours
+
+### What I've done
+1. Created a docker-compose.yaml to bring up a postgresql database
+2. Created a init.sql to create new database and tables
+3. Modified docker-compose.yaml to copy init.sql into /docker-entrypoint-initdb.d
+4. Created a ER Diagram, er-diagram.png to visualize the database design
+
+### What to improve on
+1. Include the datatypes of each attribute
+2. Furnish more details in Receipt table. For example, datetime, taxable amount, total payable.
+
+### How to setup on your local machine
+1. Dowload the entire repo to your computer
+2. Install the latest version of Docker Desktop
+3. Open your terminal and navigate to ./Section2
+4. run this command, docker-compose up -d
+5. Open a browser and navigate to this URL, localhost:8080
+6. Enter 'postgres' for user, 'example' for password
+7. 
