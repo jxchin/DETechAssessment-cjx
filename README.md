@@ -96,8 +96,8 @@ Approximately 2 hours
 Approximately 2 hours
 
 ### What I've done
-1. The provided API doesn't work. So I used Covid-19 Weekly Stats dataset from Data.gov.sg
-2. Since the dataset is already aggregated and it made the assignment easier, I decided to include a table to show which month had the highest cases
+1. The provided API doesn't work. So I used Covid-19 Weekly Stats dataset from Data.gov.sg (https://data.gov.sg/dataset/covid-19-stats?resource_id=68289dd4-e9d1-41cf-afe6-b093d04b60af)
+2. Since the dataset is aggregated and it made the assignment easier, I decided to include a table to show which month had the highest cases
 2. Research on various DAX examples to prep my dataset
 
 ### What to improve on
