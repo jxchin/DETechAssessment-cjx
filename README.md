@@ -76,3 +76,35 @@ Approximately 3 hours
 
 ### How to shutdown
 1. Run this command, docker-compose down -v
+
+## Section 3: System Design
+
+### Time spent
+
+
+### What I've done
+
+
+### What to improve on
+
+
+## Section 4: Charts & APIs
+
+### Time spent
+
+
+### What I've done
+
+
+### What to improve on
+
+
+## Section 5: Machine Learning
+
+### Time spent
+
+
+### What I've done
+
+
+### What to improve on
