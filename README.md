@@ -80,13 +80,14 @@ Approximately 3 hours
 ## Section 3: System Design
 
 ### Time spent
-
+Approximately 2 hours
 
 ### What I've done
-
+1. Research on Apache Kafka, Kafka Stream
+2. Research on native Data Lifecycle Management capabilities on Azure Cloud Storage
 
 ### What to improve on
-
+1. Include network components such as WAF or Firewall.
 
 ## Section 4: Charts & APIs
 
