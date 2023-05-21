@@ -1,5 +1,3 @@
-CREATE DATABASE sectiontwo;
-
 CREATE TABLE member (
 	id serial primary key,
 	membership_id varchar(255),
@@ -17,11 +15,10 @@ CREATE TABLE product (
 	product_weight numeric (18,2)
 );
 
-CREATE TABLE sales (
+CREATE TABLE product_sold (
 	id serial primary key,
 	receipt_id varchar(255),
-	product_id varchar(255),
-
+	product_id varchar(255)
 );
 
 CREATE TABLE receipt (
