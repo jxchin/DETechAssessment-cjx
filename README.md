@@ -31,12 +31,15 @@ Approximately 11 hours.
 1. Download the entire repo to your computer
 2. Install the latest version of Docker Desktop
 3. Open your terminal and navigate to ./Section1
-4. run this command, docker-compose up airflow-init
-5. run this command, docker-compose up -d
+4. Run this command, docker-compose up airflow-init
+5. Run this command, docker-compose up -d
 6. Open a browser and navigate to this URL, localhost:8080
 7. Enter 'airflow' for both user id and password
-8. click on 'application_submission_dag'
-9. click the run button on the top-right of the screen
+8. Click on 'application_submission_dag'
+9. Click the run button on the top-right of the screen
+
+### How to shutdown
+1. Run this command, docker-compose down -v
 
 ## Section 2: Databases
 
@@ -70,3 +73,6 @@ Approximately 3 hours
 12. Click 'SQL command' on the left panel
 13. Copy the SQL statement from QueryStatement.sql and paste into the textbox
 14. Click 'Execute' to run the SQL statement.
+
+### How to shutdown
+1. Run this command, docker-compose down -v
