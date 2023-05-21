@@ -24,6 +24,7 @@ Approximately 11 hours.
 ### What to improve on
 1. Separate my functions into various files and import them in my main script.
 2. Add more try blocks and logging in my functions
+3. Create a function to check and remove special characters from mobile_no, if any.
 
 ### How to setup on your local machine
 
@@ -50,7 +51,9 @@ Approximately 3 hours
 
 ### What to improve on
 1. Include the datatypes of each attribute
-2. Furnish more details in Receipt table. For example, datetime, taxable amount, total payable.
+2. Include firstname,lastname,above_18 attributes in Member table
+3. Include quantity in Product_Sold table
+3. Furnish more details in Receipt table. For example, datetime, taxable amount, total payable.
 
 ### How to setup on your local machine
 1. Dowload the entire repo to your computer
@@ -58,5 +61,12 @@ Approximately 3 hours
 3. Open your terminal and navigate to ./Section2
 4. run this command, docker-compose up -d
 5. Open a browser and navigate to this URL, localhost:8080
-6. Enter 'postgres' for user, 'example' for password
-7. 
+6. Select PostgreSQL for System
+7. Enter 'postgres' for username
+8. Enter 'example' for password
+9. Enter 'postgres' for Database
+10. Click Login
+11. You should see 4 tables. Click each table to see table schema
+12. Click 'SQL command' on the left panel
+13. Copy the SQL statement from QueryStatement.sql and paste into the textbox
+14. Click 'Execute' to run the SQL statement.
