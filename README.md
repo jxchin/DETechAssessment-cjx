@@ -93,13 +93,24 @@ Approximately 2 hours
 ## Section 4: Charts & APIs
 
 ### Time spent
-
+Approximately 2 hours
 
 ### What I've done
-
+1. The provided API doesn't work. So I used Covid-19 Weekly Stats dataset from Data.gov.sg
+2. Since the dataset is already aggregated and it made the assignment easier, I decided to include a table to show which month had the highest cases
+2. Research on various DAX examples to prep my dataset
 
 ### What to improve on
+1. Overall presentation of the dashboard
+2. Using advanced technique to add visual effects to the dashboard
 
+### How to setup on your local machine
+1. Dowload the entire repo to your computer
+2. Install the latest version of Microsoft Power BI Desktop
+3. Launch Power BI Desktop
+4. Click File
+5. Click Open report
+6. Select Covid19 Dashboard.pbix in Section4 folder
 
 ## Section 5: Machine Learning
 
