@@ -84,7 +84,8 @@ Approximately 2 hours
 
 ### What I've done
 1. Research on Apache Kafka, Kafka Stream
-2. Research on native Data Lifecycle Management capabilities on Azure Cloud Storage
+2. Research on Event Hub's native capability to store records in Storage Account
+3. Research on native Data Lifecycle Management capabilities on Azure Cloud Storage
 
 ### What to improve on
 1. Include network components such as WAF or Firewall.
