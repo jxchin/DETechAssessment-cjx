@@ -115,9 +115,14 @@ Approximately 2 hours
 ## Section 5: Machine Learning
 
 ### Time spent
-
+Approximately 4 hours
 
 ### What I've done
-
+1. Identified objective to prediction 'buying' value
+2. Research on top prediction model. (Gradient boosting, decision tree)
+3. Tried Decision Tree and simple hyperparameter tuning
+4. Tried XGBoost
+5. Tried Azure Machine Learning's AutoML to compare with my accuracy
 
 ### What to improve on
+1. Need more experience and practice on simple ML
